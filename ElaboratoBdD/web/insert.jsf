@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>JSF - commandButton example</title>
+    </h:head>
+    <body background="resources\images\md6.jpg" style="background-size: cover">
+         <h:dataTable value="#{user.getResStringQuery5()}" var="c" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+                <h:column>
+                    sezione messagio di #{c.nome}  #{c.cog}
+                </h:column>
+
+         </h:dataTable>
+        <h:form>
+            <h:panelGrid > 
+            <h:outputLabel value="oggetto " style="font-weight:bold" /> 
+            <h:inputText value="#{insertBean.oggetto}" >
+                <f:validateLength maximum="30"  />
+            </h:inputText>
+
+             <h:outputLabel value="tipologia" style="font-weight:bold" />
+            <h:selectOneMenu id="subscriptions"   value="#{insertBean.tipologia  }">
+                    <f:selectItem id="item1" itemLabel="generale" itemValue="generale" />
+                    <f:selectItem id="item2" itemLabel="didattica" itemValue="didattica"/>
+                    <f:selectItem id="item3" itemLabel="vitto" itemValue="vitto" />
+                    <f:selectItem id="item4" itemLabel="allogio" itemValue="allogio" />
+                    <f:selectItem id="item5" itemLabel="iniziative" itemValue="iniziative" />
+                    <f:selectItem id="item6" itemLabel="lezioni" itemValue="lezioni" />
+                    <f:selectItem id="item7" itemLabel="consigli" itemValue="consigli" />
+                </h:selectOneMenu>
+             <h:outputLabel value="testo " style="font-weight:bold" />
+            <h:inputTextarea value="#{insertBean.testo}" style= "width:1000px; height:400px"  >
+            <f:validateLength maximum="140"  /></h:inputTextarea>
+            <h:commandButton value="Submit" action="#{qv.submit(user.matricolaUB, insertBean)}">
+            </h:commandButton>
+            </h:panelGrid>
+        </h:form>
+            
+            <h:outputText value="#{qv.insert.output}" />
+            <p> </p>
+<h:button value="home" outcome="index.jsf" >   </h:button>
+    </body>
+</html>

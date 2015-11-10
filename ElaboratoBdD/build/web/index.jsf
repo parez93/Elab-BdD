@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+  <title>Corsi di Studio Esistenti</title>
+</h:head>
+
+
+    <body background="resources\images\md1.jpg"  >
+  <h1  align="center"  >Corso di studi ospitanti</h1>
+
+  <h:form>
+       <h:button value="Forum studenti erasmus " outcome="forumErasmusPage.jsf"  >   </h:button>
+       <p/>
+       
+       <h:button value="Studenti erasmus " outcome="studenti_erasmus.jsf" >   </h:button>
+      <div align="center">
+    <h:dataTable value="#{qv.getResStringQuery1()}" var="c" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+      <h:column>
+        <f:facet name="header">NomeCl</f:facet>
+        #{c.getNomeCl()}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Tipo</f:facet>
+        #{c.getTipoCl()}
+      </h:column>
+      <h:column>
+        <f:facet name="header">facolta</f:facet>
+        #{c.getFacolta()}
+      </h:column>
+       <h:column>
+        <f:facet name="header">Nstudenti</f:facet>
+        #{c.getnStudenti()}
+      </h:column>
+    </h:dataTable>
+      </div>
+  </h:form>
+      
+      
+      
+ 
+</body>
+      
+      
+      
+</html>

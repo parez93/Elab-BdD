@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>pagina personale Stude erasmus</title>
+    </h:head>
+    <h:body background="resources\images\md5.jpg" >
+
+        <h1  align="center">    DATI STUDENTE </h1>
+         <h:button value="inserire messaggio" outcome="insert.jsf" >   </h:button>
+         <p></p>
+          <h:button value="home" outcome="index.jsf" >   </h:button>
+        <h:form>
+             <div align="center">
+            <h:dataTable value="#{user.getResStringQuery5()}" var="c" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+
+                <h:column>
+                    <f:facet name="header">Mat   </f:facet>
+                        #{c.getMat()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">cognome</f:facet>
+                        #{c.cog}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nome</f:facet>
+                        #{c.nome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">UniProv</f:facet>
+                        #{c.uni}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">STATO PROVENIENZA</f:facet>
+                        #{c.stato}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">data nascita</f:facet>
+                        #{c.dn}
+                </h:column>
+
+            </h:dataTable>
+           </div>
+        </h:form>
+                
+        <div align="center">       
+        <h:form>
+            <h:dataTable value="#{user.getResStringQuery6()}" var="c3" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+
+                <h:column>
+                    <f:facet name="header">corso ospitante   </f:facet>
+                    #{c3.nomeCL}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">durata</f:facet>
+                    #{c3.durata}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">data arrivo</f:facet>
+                    #{c3.daS}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">data ritorno</f:facet>
+                    #{c3.drS}
+                </h:column>
+               
+            </h:dataTable>
+        </h:form>
+          </div>
+
+ <div align="center">
+        <h:form>
+            <h:dataTable value="#{qv.getResStringQuery7(user.getMatricolaUB())}" var="c2" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+                <h:column>
+                    <f:facet name="header">cognome</f:facet>
+                        #{c2.getCog()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nome</f:facet>
+                        #{c2.getNome()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nomei</f:facet>
+                        #{c2.getNomei()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Cod</f:facet>
+                        #{c2.getCod()}
+                        
+                </h:column>
+            </h:dataTable>
+        </h:form>  
+ </div>
+    </h:body>
+</html>

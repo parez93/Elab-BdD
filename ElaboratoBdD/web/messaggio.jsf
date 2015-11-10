@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Messaggio</title>
+    </h:head   >
+    <body background="resources\images\md4.jpg">
+
+
+        <h:form>
+            <div align="center">
+            <h:dataTable value="#{user.getResStringQuery9(request.getParameter('id'))}" var="c2" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+                <h:column>
+                    <f:facet name="header"> oggetto </f:facet> 
+                    #{c2.oggetto}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> testo </f:facet>
+                        #{c2.testom }
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Data-ora</f:facet>
+                        #{c2.dataoram }
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> tipologia </f:facet>
+                    #{c2.tipologia }
+                </h:column>
+            </h:dataTable>
+           </div>
+        </h:form>
+                <h:button value="home" outcome="index.jsf" >   </h:button>
+                <p/>
+                <h:button value="back " outcome="forumErasmusPage.jsf" >   </h:button>
+    </body>
+</html>
+

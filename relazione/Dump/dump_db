@@ -1,0 +1,726 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: commento; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE commento (
+    messaggio integer NOT NULL,
+    studentec character varying(10) NOT NULL,
+    dataorac timestamp without time zone NOT NULL,
+    testoc character varying(140) NOT NULL
+);
+
+
+ALTER TABLE commento OWNER TO userlab07;
+
+--
+-- Name: corso_laurea; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE corso_laurea (
+    nomecl character varying(20) NOT NULL,
+    durata integer NOT NULL,
+    tipo character varying(30) NOT NULL
+);
+
+
+ALTER TABLE corso_laurea OWNER TO userlab07;
+
+--
+-- Name: facolta; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE facolta (
+    nomef character varying(20) NOT NULL
+);
+
+
+ALTER TABLE facolta OWNER TO userlab07;
+
+--
+-- Name: insegnamento; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE insegnamento (
+    cod character varying(10) NOT NULL,
+    corso_laureai character varying(20),
+    nomei character varying(30) NOT NULL,
+    doc character varying(30) NOT NULL,
+    aa character varying(9) NOT NULL
+);
+
+
+ALTER TABLE insegnamento OWNER TO userlab07;
+
+--
+-- Name: messaggio; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE messaggio (
+    id integer NOT NULL,
+    studentem character varying(10) NOT NULL,
+    dataoram timestamp without time zone NOT NULL,
+    oggetto character varying(30) NOT NULL,
+    testom character varying(140) NOT NULL,
+    tipologia character varying(20) NOT NULL
+);
+
+
+ALTER TABLE messaggio OWNER TO userlab07;
+
+--
+-- Name: messaggio_id_seq; Type: SEQUENCE; Schema: public; Owner: userlab07
+--
+
+CREATE SEQUENCE messaggio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE messaggio_id_seq OWNER TO userlab07;
+
+--
+-- Name: messaggio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: userlab07
+--
+
+ALTER SEQUENCE messaggio_id_seq OWNED BY messaggio.id;
+
+
+--
+-- Name: messaggiot2; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE messaggiot2 (
+    id integer NOT NULL,
+    studentem character varying(10) NOT NULL,
+    dataoram timestamp without time zone NOT NULL,
+    oggetto character varying(30) NOT NULL,
+    testom character varying(140) NOT NULL,
+    tipologia character varying(20) NOT NULL
+);
+
+
+ALTER TABLE messaggiot2 OWNER TO userlab07;
+
+--
+-- Name: messaggiot2_id_seq; Type: SEQUENCE; Schema: public; Owner: userlab07
+--
+
+CREATE SEQUENCE messaggiot2_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE messaggiot2_id_seq OWNER TO userlab07;
+
+--
+-- Name: messaggiot2_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: userlab07
+--
+
+ALTER SEQUENCE messaggiot2_id_seq OWNED BY messaggiot2.id;
+
+
+--
+-- Name: messagio2; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE messagio2 (
+    data timestamp without time zone,
+    testo character varying(140),
+    id integer
+);
+
+
+ALTER TABLE messagio2 OWNER TO userlab07;
+
+--
+-- Name: proposta; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE proposta (
+    facolta character varying(20) NOT NULL,
+    corso_laureap character varying(20) NOT NULL
+);
+
+
+ALTER TABLE proposta OWNER TO userlab07;
+
+--
+-- Name: seguito; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE seguito (
+    studentes character varying(10) NOT NULL,
+    ins_cod character varying(10) NOT NULL
+);
+
+
+ALTER TABLE seguito OWNER TO userlab07;
+
+--
+-- Name: studente; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE studente (
+    mat character varying(10) NOT NULL,
+    cog character varying(10) NOT NULL,
+    nome character varying(10) NOT NULL,
+    uni character varying(20) NOT NULL,
+    stato character varying(30) NOT NULL,
+    dn date NOT NULL,
+    login character varying(10) NOT NULL,
+    pw character varying(10) NOT NULL,
+    corso_laureas character varying(20) NOT NULL,
+    da date NOT NULL,
+    dr date
+);
+
+
+ALTER TABLE studente OWNER TO userlab07;
+
+--
+-- Name: test; Type: TABLE; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+CREATE TABLE test (
+    matricola character(6) NOT NULL,
+    prova character varying(20)
+);
+
+
+ALTER TABLE test OWNER TO userlab07;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY messaggio ALTER COLUMN id SET DEFAULT nextval('messaggio_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY messaggiot2 ALTER COLUMN id SET DEFAULT nextval('messaggiot2_id_seq'::regclass);
+
+
+--
+-- Data for Name: commento; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY commento (messaggio, studentec, dataorac, testoc) FROM stdin;
+1	vr00000001	2014-08-23 13:45:00	//un commento
+2	vr00000002	2011-08-30 14:23:00	/*un commento*/
+3	vr00000003	2011-01-29 15:11:00	#un commento
+4	vr00000004	2013-12-21 16:49:00	<!-- un commento -->
+5	vr00000005	2014-03-29 17:36:00	--un commento
+6	vr00000006	2015-12-31 18:39:00	%un commento
+7	vr00000007	2015-04-24 19:12:00	rem un commento
+8	vr00000008	2015-04-08 20:04:00	{un commento}
+9	vr00000009	2015-04-08 21:52:00	(*un commento*)
+10	vr00000010	2015-01-08 22:25:00	#cs un commento
+11	vr00000011	2010-12-08 23:19:00	! un commento
+12	vr00000012	2011-01-22 08:23:00	; un commento
+13	vr00000013	2011-01-22 09:51:00	#ce un commento
+14	vr00000014	2011-01-23 10:23:00	~ un commento
+15	vr00000015	2011-02-08 12:52:00	ˆun commento
+16	vr00000019	2014-01-02 13:40:00	Testoc 1
+17	vr00000025	2014-01-16 14:41:00	Testoc 2
+25	vr00000027	2014-09-14 02:32:00	Testoc 3
+28	vr00000019	2014-10-21 01:35:00	Testoc 4
+19	vr00000024	2015-04-03 16:44:00	Testoc 5
+20	vr00000020	2014-06-15 11:45:00	Testoc 6
+21	vr00000027	2014-05-03 09:46:00	Testoc 7
+20	vr00000020	2014-06-22 10:47:00	Testoc 8
+16	vr00000024	2014-01-05 12:48:00	Testoc 9
+23	vr00000019	2014-10-09 10:09:00	Testoc 10
+22	vr00000021	2014-07-05 22:50:00	Testoc 11
+17	vr00000028	2014-01-17 23:51:00	Testoc 12
+19	vr00000021	2014-06-06 08:52:00	Testoc 13
+18	vr00000028	2015-04-08 07:53:00	Testoc 14
+20	vr00000031	2015-05-09 03:54:00	Testoc 15
+\.
+
+
+--
+-- Data for Name: corso_laurea; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY corso_laurea (nomecl, durata, tipo) FROM stdin;
+informatica	3	laurea triennale
+matematica	3	laurea triennale
+biotecnologie	3	laurea triennale
+medicina	7	laurea specialistica
+infermieristica	3	laurea triennale
+bioinformatica	3	laurea triennale
+scienze motorie	3	laurea triennale
+economia	3	laurea triennale
+visual computing	2	laurea magistrale
+sistemi embedded	2	laurea magistrale
+teologia	7	magistrale
+penale	3	specialistica
+lingue	3	trienale
+filosofia	3	trienale
+lettere	5	quinquenale
+\.
+
+
+--
+-- Data for Name: facolta; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY facolta (nomef) FROM stdin;
+scienze
+medicina
+scienze motorie
+economia
+seminario
+legge
+F.L.&L.
+\.
+
+
+--
+-- Data for Name: insegnamento; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY insegnamento (cod, corso_laureai, nomei, doc, aa) FROM stdin;
+ins0000001	informatica	basi di dati	alberto belussi	2014/2015
+ins0000002	informatica	programmazione	fausto spoto	2013/2014
+ins0000003	informatica	immagini	gloria menegaz	2012/2013
+ins0000004	matematica	analisi 3	sisto baldo	2011/2012
+ins0000005	matematica	fondamenti della matematica	antonio marigonda	2010/2011
+ins0000006	infermieristica	patologia	massimiliano masetti	2009/2010
+ins0000007	biotecnologie	filosofia della scienza	emanuele ferri	2008/2019
+ins0000008	biotecnologie	genetica	immanuel kant	2007/2008
+ins0000009	bioinformatica	architettura	tommaso aquino	2006/2008
+ins0000010	medicina	farmacologia	thomas kuhn	2005/2006
+ins0000011	medicina	anatomia	galileo galilei	2004/2005
+ins0000012	scienze motorie	ginnastica	guglielmo marconi	2003/2004
+ins0000013	economia	microeconomia	harrison ford	2002/2003
+ins0000014	visual computing	ttr	andrea giacchetti	2001/2002
+ins0000015	sistemi embedded	sistemi operativi avanzati	graziano pravadelli	2000/2001
+teo0001	teologia	greco antico I	marina gialli	2014/2015
+teo0002	teologia	cristianesimo	marco rossi	2013/2014
+teo0003	teologia	latino	antonio bianchi	2014/2015
+giu0001	penale	dirito civile I	sara bianchi	2014/2015
+giu0002	penale	dirito penale I	teresa verdi	2013/2014
+giu0003	penale	dirto penale II	luca monti	2012/2013
+fll0001	lingue	tedescoI	mark schwarz	2014/2015
+fll0002	lingue	spegnoli II	anna blanca	2014/2015
+fll0003	lingue	francese III	jaune claire	2014/2015
+fll0004	filosofia	filosofi I	mirco blu	2014/2015
+fll0005	filosofia	filosofi II	anna rossi	2014/2015
+fll0006	filosofia	storia I	antonio bianconi	2014/2015
+fll0007	lettere	testi anthi I	chiara verdoni	2014/2015
+fll0008	lettere	letteretura I	michela verdi	2014/2015
+fll0009	lettere	letteratura II	simone rossi	2014/2015
+\.
+
+
+--
+-- Data for Name: messaggio; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY messaggio (id, studentem, dataoram, oggetto, testom, tipologia) FROM stdin;
+1	vr00000001	2014-01-23 00:00:00	java.lang.object 1	Lorem ipsum 1	generale
+2	vr00000002	2013-01-17 00:00:00	java.lang.object 2	Lorem ipsum 2	generale
+3	vr00000003	2012-01-19 00:00:00	java.lang.object 3	Lorem ipsum 3	didattica
+4	vr00000004	2011-01-21 00:00:00	java.lang.object 4	Lorem ipsum 4	didattica
+5	vr00000005	2010-03-29 00:00:00	java.lang.object 5	Lorem ipsum 5	vitto
+6	vr00000006	2014-12-31 00:00:00	java.lang.object 6	Lorem ipsum 6	vitto
+7	vr00000007	2015-03-08 00:00:00	java.lang.object 7	Lorem ipsum 7	alloggio
+8	vr00000008	2015-01-24 00:00:00	java.lang.object 8	Lorem ipsum 8	alloggio
+9	vr00000009	2015-04-08 00:00:00	java.lang.object 9	Lorem ipsum 9	iniziative
+10	vr00000010	2015-01-08 00:00:00	java.lang.object 10	Lorem ipsum 10	iniziative
+11	vr00000011	2014-01-08 00:00:00	java.lang.object 11	Lorem ipsum 11	lezioni
+12	vr00000012	2013-12-08 00:00:00	java.lang.object 12	Lorem ipsum 12	lezioni
+13	vr00000013	2011-01-20 00:00:00	java.lang.object 13	Lorem ipsum 13	consigli
+14	vr00000014	2011-08-20 00:00:00	java.lang.object 14	Lorem ipsum 14	consigli
+15	vr00000015	2014-08-08 00:00:00	java.lang.object 15	Lorem ipsum 15	consigli
+16	vr00000016	2014-01-01 13:40:00	Oggetto 15	Messagio 1	generale
+17	vr00000031	2014-01-15 09:46:00	Oggetto 16	Messagio 2	diddatica
+18	vr00000020	2014-03-05 08:52:00	Oggetto 17	Messagio 3	vitto
+19	vr00000017	2014-04-03 07:53:00	Oggetto 18	Messagio 4	iniziative
+20	vr00000021	2014-04-10 03:54:00	Oggetto 19	Messagio 5	lezioni
+21	vr00000025	2014-05-02 23:51:00	Oggetto 20	Messagio 6	consigli
+22	vr00000020	2014-07-04 22:50:00	Oggetto 21	Messagio 7	generale
+23	vr00000027	2014-07-08 02:32:00	Oggetto 22	Messagio 8	generale
+24	vr00000027	2014-07-11 16:44:00	Oggetto 23	Messagio 9	consigli
+25	vr00000025	2014-08-14 04:41:00	Oggetto 24	Messagio 10	vitto
+26	vr00000019	2014-09-06 12:48:00	Oggetto 25	Messagio 11	iniziative
+27	vr00000021	2014-09-12 11:45:00	Oggetto 26	Messagio 12	diddatica
+28	vr00000025	2014-10-13 10:09:00	Oggetto 27	Messagio 13	diddatica
+29	vr00000027	2014-11-07 10:47:00	Oggetto 28	Messagio 14	generale
+30	vr00000019	2014-12-09 01:35:00	Oggetto 29	Messagio 15	vitto
+31	vr00000001	2015-05-16 11:27:23	oggeto 85	testo 85	generale
+32	vr00000016	2015-05-16 11:28:48	prova 1	prova 1	iniziative
+33	vr00000016	2015-05-16 16:11:47	casa	cerco casa	allogio
+34	vr00000016	2015-05-16 16:33:00	tests	prova 	generale
+35	vr00000001	2015-05-16 16:53:25	oggeto 85	testo 85	generale
+36	vr00000001	2015-05-16 16:53:37	oggeto 85	testo 85	generale
+37	vr00000001	2015-05-16 16:54:37	oggeto 85	testo 85	generale
+38	vr00000001	2015-05-16 16:55:55	oggeto 85	testo 85	generale
+39	vr00000001	2015-05-16 16:56:57	oggeto 85	testo 85	generale
+40	vr00000016	2015-05-16 16:58:58	tasdas	asdasdasd	vitto
+41	vr00000016	2015-05-19 15:35:26	oggetto 85	asdasd	vitto
+42	vr00000016	2015-06-11 08:46:03	gd	d	didattica
+\.
+
+
+--
+-- Name: messaggio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: userlab07
+--
+
+SELECT pg_catalog.setval('messaggio_id_seq', 42, true);
+
+
+--
+-- Data for Name: messaggiot2; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY messaggiot2 (id, studentem, dataoram, oggetto, testom, tipologia) FROM stdin;
+1	studente 1	2015-05-14 10:12:03	oggeto 1	testo 1	tipologia 1
+2	studente 2	2015-05-14 10:12:03	oggeto 2	testo 2	tipologia 2
+3	studente 3	2015-05-14 10:12:04	oggeto 3	testo 3	tipologia 3
+4	studente 4	2015-05-14 10:12:04	oggeto 4	testo 4	tipologia 4
+5	studente 5	2015-05-14 10:12:04	oggeto 5	testo 5	tipologia 5
+6	stud11	2015-05-14 10:14:08	oggeto 11	testo 11	tipologia 11
+7	stud12	2015-05-14 10:14:08	oggeto 12	testo 12	tipologia 12
+8	stud13	2015-05-14 10:14:09	oggeto 13	testo 13	tipologia 13
+9	stud14	2015-05-14 10:14:09	oggeto 14	testo 14	tipologia 14
+10	stud15	2015-05-14 10:14:09	oggeto 15	testo 15	tipologia 15
+11	stud85	2015-05-16 11:21:39	oggeto 85	testo 85	tipologia 85
+12	stud86	2015-05-16 11:21:39	oggeto 86	testo 86	tipologia 86
+13	stud87	2015-05-16 11:21:39	oggeto 87	testo 87	tipologia 87
+14	stud88	2015-05-16 11:21:39	oggeto 88	testo 88	tipologia 88
+15	stud89	2015-05-16 11:21:39	oggeto 89	testo 89	tipologia 89
+\.
+
+
+--
+-- Name: messaggiot2_id_seq; Type: SEQUENCE SET; Schema: public; Owner: userlab07
+--
+
+SELECT pg_catalog.setval('messaggiot2_id_seq', 15, true);
+
+
+--
+-- Data for Name: messagio2; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY messagio2 (data, testo, id) FROM stdin;
+2015-05-14 09:02:00	sa sa prova	1
+2015-05-14 09:13:19	termini	2
+2015-05-14 09:13:20	termini	2
+2015-05-14 09:18:04	dopo if termini	2
+2015-05-14 09:18:26	serto io	2
+2015-05-14 09:44:05	dopo if serto io	2
+\.
+
+
+--
+-- Data for Name: proposta; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY proposta (facolta, corso_laureap) FROM stdin;
+scienze	informatica
+scienze	matematica
+scienze	biotecnologie
+scienze	medicina
+medicina	infermieristica
+scienze	bioinformatica
+scienze motorie	scienze motorie
+economia	economia
+scienze	visual computing
+scienze	sistemi embedded
+seminario	teologia
+legge	penale
+F.L.&L.	lingue
+F.L.&L.	filosofia
+F.L.&L.	lettere
+scienze	economia
+\.
+
+
+--
+-- Data for Name: seguito; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY seguito (studentes, ins_cod) FROM stdin;
+vr00000001	ins0000001
+vr00000002	ins0000002
+vr00000003	ins0000003
+vr00000004	ins0000004
+vr00000005	ins0000005
+vr00000006	ins0000006
+vr00000007	ins0000007
+vr00000008	ins0000008
+vr00000009	ins0000009
+vr00000010	ins0000010
+vr00000011	ins0000011
+vr00000012	ins0000012
+vr00000013	ins0000013
+vr00000014	ins0000014
+vr00000015	ins0000015
+vr00000016	giu0002
+vr00000017	fll0001
+vr00000018	fll0005
+vr00000019	fll0005
+vr00000020	fll0007
+vr00000021	fll0008
+vr00000022	fll0008
+vr00000023	fll0004
+vr00000024	fll0002
+vr00000025	fll0005
+vr00000026	fll0005
+vr00000027	fll0008
+vr00000028	fll0001
+vr00000029	fll0004
+vr00000030	fll0009
+vr00000031	fll0006
+\.
+
+
+--
+-- Data for Name: studente; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY studente (mat, cog, nome, uni, stato, dn, login, pw, corso_laureas, da, dr) FROM stdin;
+vr00000001	rossi	mario	uni boston	usa	1993-01-08	vr00000001	10000000rv	informatica	2015-01-08	\N
+vr00000002	verdi	maria	uni cambridge	inghilterra	1992-01-08	vr00000002	20000000rv	informatica	2014-01-08	2014-08-08
+vr00000003	marroni	ambra	uni tokio	giappone	1993-12-08	vr00000003	30000000rv	matematica	2013-12-08	2014-05-08
+vr00000004	gialli	fausto	uni pechino	cina	1993-01-28	vr00000004	40000000rv	matematica	2012-01-28	2012-08-28
+vr00000005	blu	nicola	uni londra	inghilterra	1989-01-20	vr00000005	50000000rv	biotecnologie	2011-01-20	2011-08-20
+vr00000006	viola	andrea	uni berlino	germania	1995-04-08	vr0000006	60000000rv	biotecnologie	2015-04-08	\N
+vr00000007	neri	susanna	uni parigi	francia	1991-01-24	vr00000007	70000000rv	medicina	2015-01-24	\N
+vr00000008	bianchi	carlo	uni mosca	russia	1988-05-08	vr00000008	80000000rv	medicina	2015-03-08	\N
+vr00000009	grigi	alberto	uni madrid	spagna	1987-12-31	vr00000009	90000000rv	infermieristica	2014-12-31	2015-04-30
+vr00000010	kaki	franco	uni barcellona	spagna	1990-07-09	vr00000010	10000000rv	sistemi embedded	2009-07-09	2010-06-09
+vr00000011	lilla	graziano	uni oxford	inghilterra	1992-03-29	vr00000011	11000000rv	bioinformatica	2010-03-29	2010-09-29
+vr00000012	magenta	massimo	uni sidney	australia	1994-01-21	vr00000012	12000000rv	bioinformatica	2011-01-21	2011-09-21
+vr00000013	zaffiri	enrico	uni bruxelles	belgio	1986-01-19	vr00000013	13000000rv	visual computing	2012-01-19	2012-09-19
+vr00000014	rubini	paolo	uni dublino	irlanda	1985-01-17	vr00000014	14000000rv	scienze motorie	2013-01-17	2013-11-17
+vr00000015	diamanti	gloria	uni lisbona	portogallo	1984-01-23	vr00000015	15000000rv	economia	2014-01-23	2014-12-23
+vr00000016	Red	anna	oxford	inghilterra	1990-02-10	ra123	12354	penale	2013-03-02	2014-02-27
+vr00000017	Blu	john	oxford	inghilterra	1993-07-11	bj855	852471	lingue	2013-04-12	2015-04-12
+vr00000018	Green	alex	cambridge	inghilterra	1989-08-12	gs789	987529	filosofia	2013-04-12	\N
+vr00000019	Brown	kate	cambridge	inghilterra	1990-04-13	bk582	uhfd5	filosofia	2013-04-14	\N
+vr00000020	Blua	mark	amburgo	germania	1990-02-14	bm145	5s4dfs65d	lettere	2013-04-17	2014-11-18
+vr00000021	Weib	frank	amburgo	germania	1990-09-15	wf698	sd564f45s	lettere	2013-05-24	2014-01-22
+vr00000022	lilla	yulian	berlino	germania	1987-11-16	ly874	y5d4f	lettere	2013-09-27	\N
+vr00000023	purpurrot	alfred	berlino	germania	1990-02-17	pa142	5f4s65	filosofia	2014-01-15	\N
+vr00000024	Bluaw	Ariel	Amsterdam	olanda	1993-12-18	ba874	d5f6s5d4f	lingue	2014-01-22	2013-09-27
+vr00000025	Wit	simon	Amsterdam	olanda	1988-02-19	ws753	bfgh4dfh5	filosofia	2014-02-27	2015-11-18
+vr00000026	paaras	michel	Amsterdam	olanda	1990-02-20	pm743	hdf5g6	filosofia	2014-05-13	\N
+vr00000027	White	george	Harvard	usa	1988-02-21	wg934	fg45d6fg	lettere	2014-08-22	\N
+vr00000028	Black	richard	Harvard	usa	1991-12-22	br654	r4gd6fg	lingue	2014-10-25	2014-12-25
+vr00000029	Yellow	sue	Harvard	usa	1990-02-23	ys826	fg5d5fg	filosofia	2014-11-18	\N
+vr00000030	Azul	maria	Madrid	spagna	1990-02-24	az254	dfg565	lettere	2014-12-13	\N
+vr00000031	Rojo	pablo	Madrid	spagna	1990-05-25	rp730	hyb5d2	filosofia	2014-12-21	\N
+\.
+
+
+--
+-- Data for Name: test; Type: TABLE DATA; Schema: public; Owner: userlab07
+--
+
+COPY test (matricola, prova) FROM stdin;
+A     	Mario
+B     	sara
+C     	luca
+\.
+
+
+--
+-- Name: commento_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY commento
+    ADD CONSTRAINT commento_pkey PRIMARY KEY (messaggio, studentec, dataorac);
+
+
+--
+-- Name: corso_laurea_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY corso_laurea
+    ADD CONSTRAINT corso_laurea_pkey PRIMARY KEY (nomecl);
+
+
+--
+-- Name: facolta_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY facolta
+    ADD CONSTRAINT facolta_pkey PRIMARY KEY (nomef);
+
+
+--
+-- Name: insegnamento_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY insegnamento
+    ADD CONSTRAINT insegnamento_pkey PRIMARY KEY (cod);
+
+
+--
+-- Name: messaggio_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY messaggio
+    ADD CONSTRAINT messaggio_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: messaggiot2_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY messaggiot2
+    ADD CONSTRAINT messaggiot2_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proposta_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY proposta
+    ADD CONSTRAINT proposta_pkey PRIMARY KEY (facolta, corso_laureap);
+
+
+--
+-- Name: seguito_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY seguito
+    ADD CONSTRAINT seguito_pkey PRIMARY KEY (studentes, ins_cod);
+
+
+--
+-- Name: studente_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY studente
+    ADD CONSTRAINT studente_pkey PRIMARY KEY (mat);
+
+
+--
+-- Name: test_pkey; Type: CONSTRAINT; Schema: public; Owner: userlab07; Tablespace: 
+--
+
+ALTER TABLE ONLY test
+    ADD CONSTRAINT test_pkey PRIMARY KEY (matricola);
+
+
+--
+-- Name: commento_messaggio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY commento
+    ADD CONSTRAINT commento_messaggio_fkey FOREIGN KEY (messaggio) REFERENCES messaggio(id);
+
+
+--
+-- Name: commento_studentec_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY commento
+    ADD CONSTRAINT commento_studentec_fkey FOREIGN KEY (studentec) REFERENCES studente(mat);
+
+
+--
+-- Name: insegnamento_corso_laureai_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY insegnamento
+    ADD CONSTRAINT insegnamento_corso_laureai_fkey FOREIGN KEY (corso_laureai) REFERENCES corso_laurea(nomecl);
+
+
+--
+-- Name: messaggio_studentem_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY messaggio
+    ADD CONSTRAINT messaggio_studentem_fkey FOREIGN KEY (studentem) REFERENCES studente(mat);
+
+
+--
+-- Name: proposta_corso_laureap_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY proposta
+    ADD CONSTRAINT proposta_corso_laureap_fkey FOREIGN KEY (corso_laureap) REFERENCES corso_laurea(nomecl);
+
+
+--
+-- Name: proposta_facolta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY proposta
+    ADD CONSTRAINT proposta_facolta_fkey FOREIGN KEY (facolta) REFERENCES facolta(nomef);
+
+
+--
+-- Name: seguito_ins_cod_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY seguito
+    ADD CONSTRAINT seguito_ins_cod_fkey FOREIGN KEY (ins_cod) REFERENCES insegnamento(cod);
+
+
+--
+-- Name: seguito_studentes_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY seguito
+    ADD CONSTRAINT seguito_studentes_fkey FOREIGN KEY (studentes) REFERENCES studente(mat);
+
+
+--
+-- Name: studente_corso_laureas_fkey; Type: FK CONSTRAINT; Schema: public; Owner: userlab07
+--
+
+ALTER TABLE ONLY studente
+    ADD CONSTRAINT studente_corso_laureas_fkey FOREIGN KEY (corso_laureas) REFERENCES corso_laurea(nomecl);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

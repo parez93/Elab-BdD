@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title> Forum Esistenti</title>
+    </h:head>
+
+
+    <body    background="resources\images\md2.jpg"   >
+
+        <h1 align="center">Forum</h1>
+      
+        <h:form>
+            
+             <!--  xxxxxxxxxxxxxxxxxxxxxxxx login xxxxxxxxxxxxxxxxxxxxxxx -->
+
+        <h:form prependId="false"  action="#{user.initialize()}">
+            <h3>Inserire username e password</h3>   
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><h:inputText value="#{user.loginUB}" id="name"/></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><h:inputSecret value="#{user.passwordUB}" id="password"/></td>
+                </tr>
+
+            </table>
+            <p><h:commandButton value="Login" action="#{user.checkCredentialM()}" id="loginM">
+                    <f:ajax execute="name password login" render="check"/>
+
+
+                </h:commandButton></p>
+            <h3><h:outputText id="check" value="#{user.getStatus()}"/></h3>
+        </h:form>
+        <!--  xxxxxxxxxxxxxxxxxxxxxxxx fine login xxxxxxxxxxxxxxxxxxxxxxx -->
+            
+            
+            
+            <div align="center">
+            <h:dataTable value="#{qv.getResStringQuery8()}" var="c2" border="5" cellpadding="5" cellspacing="5"  bgcolor="white">
+                <h:column>
+                    <f:facet name="header">cognome</f:facet>
+                        #{c2.getCogS()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nome</f:facet>
+                        #{c2.getNomeS()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Data-ora</f:facet>
+                        #{c2.getDataoram()}
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">oggetto</f:facet>
+
+                    <a href="messaggio.jsf?id=#{c2.idM}" >#{c2.oggetto}</a>
+
+
+
+
+                </h:column>
+            </h:dataTable>
+          </div >
+        </h:form>
+
+       
+
+       <h:button value="home" outcome="index.jsf" >   </h:button>
+
+    </body>
+</html>
